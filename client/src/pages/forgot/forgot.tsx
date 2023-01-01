@@ -16,7 +16,7 @@ export const Forgot: FC = () => {
             </div>
             <div className='col-md-8 col-lg-6 col-xl-4 offset-xl-1'>
               <form>
-                <h1 className='display-4  start-50  position-relative translate-middle'>
+                <h1 className='display-1  start-50  position-relative translate-middle'>
                   Forgot your password?
                 </h1>
                 <hr className='hr' />
@@ -41,7 +41,7 @@ export const Forgot: FC = () => {
                     className='small fw-bold mt-2 pt-1 mb-0'
                     style={{ verticalAlign: 'middle' }}>
                     Already have an account?{' '}
-                    <a href='#!' className='link-danger'>
+                    <a href='/' className='link-danger'>
                       Sign in
                     </a>
                   </p>
@@ -49,7 +49,7 @@ export const Forgot: FC = () => {
                     className='small fw-bold mt-2 pt-1 mb-0'
                     style={{ verticalAlign: 'middle' }}>
                     Don't have an account?{' '}
-                    <a href='#!' className='link-danger'>
+                    <a href='/signup' className='link-danger'>
                       Sign up
                     </a>
                   </p>

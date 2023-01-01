@@ -23,6 +23,8 @@ export const Login: FC = () => {
         </MDBCol>
 
         <MDBCol col='4' md='6'>
+          <h1 className='display-1   '>Login to your account</h1>
+          <hr className='hr' />
           <MDBInput
             wrapperClass='mb-4'
             label='Email address'
@@ -45,31 +47,11 @@ export const Login: FC = () => {
               id='flexCheckDefault'
               label='Remember me'
             />
-            <a href='!#'>Forgot password?</a>
+            <a href='/forgot'>Forgot password?</a>
           </div>
 
           <MDBBtn className='mb-4 w-100' size='lg'>
             Sign in
-          </MDBBtn>
-
-          <div className='divider d-flex align-items-center my-4'>
-            <p className='text-center fw-bold mx-3 mb-0'>OR</p>
-          </div>
-
-          <MDBBtn
-            className='mb-4 w-100'
-            size='lg'
-            style={{ backgroundColor: '#3b5998' }}>
-            <MDBIcon fab icon='facebook-f' className='mx-2' />
-            Continue with facebook
-          </MDBBtn>
-
-          <MDBBtn
-            className='mb-4 w-100'
-            size='lg'
-            style={{ backgroundColor: '#55acee' }}>
-            <MDBIcon fab icon='twitter' className='mx-2' />
-            Continue with twitter
           </MDBBtn>
         </MDBCol>
       </MDBRow>

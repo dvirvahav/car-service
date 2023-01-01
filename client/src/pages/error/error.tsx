@@ -10,7 +10,7 @@ export const Error: FC = () => {
           <span className='text-primary'>Opps!</span> Page not found.
         </p>
         <p className='lead'>The page you’re looking for doesn’t exist.</p>
-        <a href='/home' className='btn btn-primary'>
+        <a href='/' className='btn btn-primary'>
           Go Home
         </a>
       </div>
