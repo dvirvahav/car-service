@@ -1,7 +1,12 @@
 @import './pages/home/home.css/home.css';
-
+@import './components/home/css/dataTable.css';
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
 body {
   font-family: Roboto, Helvetica, Arial, sans-serif;
+  overflow: hidden;
 }
 
 code {
