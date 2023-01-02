@@ -1,11 +1,11 @@
 import React, { FC, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Contact } from '../contact/contact';
-import { Forgot } from '../forgot/forgot';
-import { Home } from '../home/home';
-import { Login } from '../login/login';
-import { Signup } from '../signup/signup';
-import { Error } from '../error/error';
+import { Contact } from './pages/contact/contact';
+import { Forgot } from './pages/forgot/forgot';
+import { Home } from './pages/home/home';
+import { Login } from './pages/login/login';
+import { Signup } from './pages/signup/signup';
+import { Error } from './pages/error/error';
 export const App: FC = () => {
   return (
     <Router>

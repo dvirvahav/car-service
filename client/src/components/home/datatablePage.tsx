@@ -748,7 +748,7 @@ export const DatatablePage: FC = () => {
 
   return (
     <div className='dataTable'>
-      <MDBDataTable fixed hover={true} data={data} />
+      <MDBDataTable hover striped noBottomColumns data={data} />
     </div>
   );
 };
