@@ -8,7 +8,7 @@ import { db } from './src/api/db/database';
 db.raw('SELECT NOW()')
   .then((result) => console.log(`Connection successful: ${result.rows[0].now}`))
   .catch((error) => console.error(`Error connecting to database: ${error}`));
-
+const port = process.env.PORT || 3000;
 const app = Express();
 app.use(bodyParser.json());
 app.use(cors());
@@ -19,6 +19,6 @@ app.get('/', (req: Request, res: Response) => {
 });
 // Add your routes here
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server listening on port ${process.env.PORT}`);
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
