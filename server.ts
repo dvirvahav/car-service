@@ -5,10 +5,14 @@ import cors from 'cors';
 import path from 'path';
 import { db } from './src/api/db/database';
 
+import { loginHandler } from './src/api/routes/loginHandler';
+
 db.raw('SELECT NOW()')
   .then((result) => console.log(`Connection successful: ${result.rows[0].now}`))
   .catch((error) => console.error(`Error connecting to database: ${error}`));
 const port = process.env.PORT || 3001;
+const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001';
+
 const app = Express();
 app.use(bodyParser.json());
 app.use(cors());
@@ -19,9 +23,8 @@ app.get('/', (req: Request, res: Response) => {
 });
 // Add your routes here
 
+app.post(`${serverUrl}/api/login`, loginHandler);
+
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
-
-// 6LcyZ88jAAAAAMagI7wuLMOETPElR95wqDnWJifW - client side
-// 6LcyZ88jAAAAAHThPq2cs6dFYgwyy3YpOm5KAPEN - server side
