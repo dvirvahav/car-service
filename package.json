@@ -140,7 +140,7 @@
     },
     "scripts": {
         "client:build": "cd client && npm run build",
-        "start:start": "ts-node server.ts",
+        "server:start": "ts-node server.ts",
         "start": "npm run server:start"
     },
     "devDependencies": {
