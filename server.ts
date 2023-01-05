@@ -23,7 +23,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 // Add your routes here
 
-app.post(`${serverUrl}/api/login`, loginHandler);
+app.post(`/api/login`, loginHandler);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
