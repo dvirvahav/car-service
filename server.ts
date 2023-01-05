@@ -14,7 +14,6 @@ const port = process.env.PORT || 3001;
 const serverUrl = process.env.REACT_APP_SERVER_URL || '';
 
 const app = Express();
-
 app.use(bodyParser.json());
 app.use(cors());
 app.use(Express.static(path.join(__dirname, 'public')));
