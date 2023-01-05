@@ -11,7 +11,7 @@ db.raw('SELECT NOW()')
   .then((result) => console.log(`Connection successful: ${result.rows[0].now}`))
   .catch((error) => console.error(`Error connecting to database: ${error}`));
 const port = process.env.PORT || 3001;
-const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001';
+const serverUrl = process.env.REACT_APP_SERVER_URL || '';
 
 const app = Express();
 app.use(bodyParser.json());
