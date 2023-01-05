@@ -16,7 +16,7 @@ export const loginHandler = (request: Request, responseToClient: Response) => {
       reCaptcha,
     }
   )
-    .then((responseFromGoogle): void => {
+    .then((responseFromGoogle) => {
       // Check the response from the server
       if (responseFromGoogle.data.success) {
         // The reCAPTCHA was successful
