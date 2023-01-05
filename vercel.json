@@ -3,7 +3,7 @@
     "builds": [
         {
             "src": "server/package.json",
-            "use": "@vercel/node-12"
+            "use": "@vercel/node"
         }
     ],
     "routes": [
