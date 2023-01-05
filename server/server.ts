@@ -14,7 +14,7 @@ const port = process.env.PORT || 3001;
 const app = Express();
 app.use(bodyParser.json());
 app.use(cors());
-
+app.use(Express.static(path.join(__dirname, 'public')));
 app.post(`/api/login`, loginHandler);
 app.get('*', (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
