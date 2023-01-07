@@ -5,8 +5,7 @@ import { Forgot } from './pages/forgot/forgot';
 import { Home } from './pages/home/home';
 import { Login } from './pages/login/login';
 import { Signup } from './pages/signup/signup';
-import { Error } from './pages/error/error';
-import { NOTFOUND } from 'dns';
+
 export const App: FC = () => {
   return (
     <Router>

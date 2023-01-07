@@ -14,3 +14,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.popup {
+  box-shadow: rgb(0 0 0 / 5%) 0rem 1.25rem 1.6875rem;
+  opacity: 1;
+  border-radius: 1.5em;
+  cursor: pointer;
+  list-style: none;
+  padding: 30px;
+  background-color: rgb(241, 241, 241);
+}

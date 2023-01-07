@@ -5,6 +5,7 @@ import cors from 'cors';
 import path from 'path';
 import { db } from './src/api/db/database';
 import { loginHandler } from './src/api/routes/loginHandler';
+import { signupHandler } from './src/api/routes/signupHandler';
 
 db.raw('SELECT NOW()')
   .then((result) => console.log(`Connection successful: ${result.rows[0].now}`))
@@ -15,14 +16,18 @@ const app = Express();
 app.use(bodyParser.json());
 app.use(cors());
 app.use(Express.static(path.join(__dirname, 'public')));
+
 app.post('/api/login', loginHandler);
+app.post('/api/signup', signupHandler(db));
+
 app.get('*', (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
 // Add your routes here
 
 app.listen(port, () => {
-  console.log('Server listening on port ${port}');
+  console.log(`Server listening on port ${port}`);
 });
 
 module.exports = app;

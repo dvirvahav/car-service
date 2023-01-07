@@ -89,6 +89,14 @@ export const Login: FC = () => {
               Sign In
             </MDBBtn>
           </form>
+          <p
+            className='small fw-bold mt-2 pt-1 mb-0'
+            style={{ verticalAlign: 'middle' }}>
+            Don't have an account ?{' '}
+            <a href='/signup' className='link-danger'>
+              Sign up
+            </a>
+          </p>
         </MDBCol>
       </MDBRow>
     </MDBContainer>

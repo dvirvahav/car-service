@@ -1,7 +1,7 @@
-import knex from 'knex';
+import knex, { Knex } from 'knex';
 import * as dotenv from 'dotenv';
 dotenv.config();
-export const db = knex({
+export const db: Knex<any, unknown[]> = knex({
   client: 'pg',
   connection: {
     host: process.env.DB_HOST,
