@@ -20,12 +20,9 @@ export const Login: FC = () => {
     event.preventDefault();
 
     Axios.post('/api/login', {
-      method: 'POST',
-      data: {
-        mail: mail,
-        password: password,
-        reCaptcha: reRef.current?.getValue(),
-      },
+      mail: mail,
+      password: password,
+      reCaptcha: reRef.current?.getValue(),
     })
       .then((response) => {
         alert(response.data);

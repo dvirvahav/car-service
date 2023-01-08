@@ -1,28 +1,27 @@
 import Axios from 'axios';
 import { MDBBtn, MDBInput } from 'mdb-react-ui-kit';
 import PasswordValidator from 'password-validator';
-import { FC, FormEvent, useRef, useState } from 'react';
+import { FC, useReducer, useRef, useState } from 'react';
 import Popup from 'reactjs-popup';
 import { PopupActions } from 'reactjs-popup/dist/types';
-
+import ReCAPTCHA from 'react-google-recaptcha';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import md5 from 'md5';
+import { initialState, reducer } from './signup.logic';
+
 export const Signup: FC = () => {
-  const [firstName, setFirstName] = useState<string>('');
-  const [lastName, setLastName] = useState<string>('');
-  const [mail, setMail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [verifyPassword, setVerifyPassword] = useState<string>('');
   const [errors, setErrors] = useState<string[]>([]);
-  const [successfullSignup, setSucessfullSignup] = useState<boolean>(false);
+  const [successfulSignUp, setSuccessfulSignUp] = useState<boolean>(false);
+  const [state, dispatch] = useReducer(reducer, initialState);
   var schema = new PasswordValidator();
   const popupRef = useRef<PopupActions>(null);
   const navigate: NavigateFunction = useNavigate();
+  const reRef = useRef<ReCAPTCHA>(null);
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     //check demands
     event.preventDefault();
-    popupRef.current?.open();
+    console.log(state);
     const passwordValidator = schema
       .is()
       .min(6)
@@ -39,19 +38,24 @@ export const Signup: FC = () => {
       .uppercase()
       .has()
       .symbols()
-      .validate(password, { details: true });
-
+      .validate(state.password, { details: true });
+    popupRef.current?.open();
     if (Array.isArray(passwordValidator)) {
       setErrors(passwordValidator.map((error) => error.message).slice());
-      if (passwordValidator.length === 0 && password === verifyPassword) {
+      if (
+        passwordValidator.length === 0 &&
+        state.password === state.verifyPassword
+      ) {
         Axios.post('/api/signup', {
-          mail: mail,
-          firstName: firstName,
-          lastName: lastName,
-          password: md5(password),
+          mail: state.mail,
+          firstName: state.firstName,
+          lastName: state.lastName,
+          password: md5(state.password),
+          reCaptcha: reRef.current?.getValue(),
         })
           .then((response) => {
-            setSucessfullSignup(true);
+            setSuccessfulSignUp(true);
+
             if (response.data !== 'Error') {
               navigate('/login');
             }
@@ -80,7 +84,6 @@ export const Signup: FC = () => {
                 <br />
                 <h1 className='display-1   '>Sign up</h1>
                 <hr className='hr' />
-
                 <MDBInput
                   required
                   wrapperClass='mb-4'
@@ -88,12 +91,14 @@ export const Signup: FC = () => {
                   id='formControlLg'
                   type='text'
                   size='lg'
-                  value={firstName}
+                  value={state.firstName}
                   onChange={(event) => {
-                    setFirstName(event.target.value);
+                    dispatch({
+                      type: 'setFirstName',
+                      firstName: event.target.value,
+                    });
                   }}
                 />
-
                 <MDBInput
                   required
                   wrapperClass='mb-4'
@@ -101,12 +106,14 @@ export const Signup: FC = () => {
                   id='formControlLg'
                   type='text'
                   size='lg'
-                  value={lastName}
+                  value={state.lastName}
                   onChange={(event) => {
-                    setLastName(event.target.value);
+                    dispatch({
+                      type: 'setLastName',
+                      lastName: event.target.value,
+                    });
                   }}
                 />
-
                 <MDBInput
                   required
                   wrapperClass='mb-4'
@@ -114,12 +121,14 @@ export const Signup: FC = () => {
                   id='formControlLg'
                   type='email'
                   size='lg'
-                  value={mail}
+                  value={state.mail}
                   onChange={(event) => {
-                    setMail(event.target.value);
+                    dispatch({
+                      type: 'setMail',
+                      mail: event.target.value,
+                    });
                   }}
                 />
-
                 <MDBInput
                   required
                   wrapperClass='mb-4'
@@ -127,12 +136,14 @@ export const Signup: FC = () => {
                   id='formControlLg'
                   type='password'
                   size='lg'
-                  value={password}
+                  value={state.password}
                   onChange={(event) => {
-                    setPassword(event.target.value);
+                    dispatch({
+                      type: 'setPassword',
+                      password: event.target.value,
+                    });
                   }}
                 />
-
                 <MDBInput
                   required
                   wrapperClass='mb-4'
@@ -140,20 +151,27 @@ export const Signup: FC = () => {
                   id='formControlLg'
                   type='password'
                   size='lg'
-                  value={verifyPassword}
+                  value={state.verifyPassword}
                   onChange={(event) => {
-                    setVerifyPassword(event.target.value);
+                    dispatch({
+                      type: 'setVerifyPassword',
+                      verifyPassword: event.target.value,
+                    });
                   }}
                 />
+                <ReCAPTCHA
+                  sitekey='6LcyZ88jAAAAAMagI7wuLMOETPElR95wqDnWJifW'
+                  ref={reRef}
+                />{' '}
+                <br />
                 <MDBBtn
                   className='btn btn-primary btn-lg btn-block'
                   type='submit'>
                   Submit Form
                 </MDBBtn>
-
                 <Popup ref={popupRef} modal>
                   <div className='alert popup text-center'>
-                    {successfullSignup ? (
+                    {successfulSignUp ? (
                       <div role='alert'>
                         Your account has been successfully created! <br />
                         Details has been sent to your mail.
@@ -162,14 +180,13 @@ export const Signup: FC = () => {
                           Login
                         </a>
                       </div>
-                    ) : password !== verifyPassword ? (
+                    ) : state.password !== state.verifyPassword ? (
                       <div>Passwords do not match</div>
                     ) : (
                       errors.map((error) => <p key={error}>{error}</p>)
                     )}
                   </div>
                 </Popup>
-
                 <p
                   className='small fw-bold mt-2 pt-1 mb-0'
                   style={{ verticalAlign: 'middle' }}>
