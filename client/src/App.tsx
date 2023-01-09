@@ -17,11 +17,7 @@ export const App: FC = () => {
           <Route path='/contact' element={<Contact />} />
           <Route path='/forgot' element={<Forgot />} />
           <Route path='/home' element={<Home />} />
-          <Route
-            path='/reset-password/:token'
-            element={<ResetPasswordPage />}
-          />
-
+          <Route path='/resetPassword/:token' element={<ResetPasswordPage />} />
           <Route path='*' element={<Error />} />
         </Routes>
       </Fragment>
