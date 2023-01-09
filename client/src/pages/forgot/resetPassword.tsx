@@ -6,15 +6,15 @@ export const ResetPasswordPage: FC = () => {
   const [newPassword, setNewPassword] = useState<string>('');
 
   const handleSubmit = () => {
-    Axios.post(`/api/resetPassword/${token}`, { password: newPassword }).then(
-      (response) => {
-        if (response.data.error) {
-          alert(response.data.error);
-        } else {
-          alert('Password reset successfully!');
-        }
+    Axios.post(`/api/resetPassword/${token}`, {
+      password: newPassword,
+    }).then((response) => {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
+        alert('Password reset successfully!');
       }
-    );
+    });
   };
 
   return (
