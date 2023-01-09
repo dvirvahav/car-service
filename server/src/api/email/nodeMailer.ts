@@ -38,3 +38,25 @@ export const welcomeMail = (
   `,
   });
 };
+
+export const sendPasswordResetEmail = (clientMail: string, token: string) => {
+  mailService.sendMail({
+    from: process.env.MAIL,
+    to: clientMail,
+    subject: 'Password Reset Request',
+    html: `
+    
+    <p> We received a request to reset the password for your account. If you made this request, 
+    please follow the instructions below to reset your password.</p>
+    <p>Here's a quick overview of what you can expect:</p>
+    <ul>
+      <li>Click on the following link to access the password reset page: https://car-service-nine.vercel.app//reset-password/${token}</li>
+      <li>Enter your email address and the new password you would like to use.</li>
+      <li>Click "Reset Password" to complete the process.</li>
+    </ul>
+    <p>If you did not request a password reset, please ignore this email and your password will remain unchanged.</p>
+    <p>Thank you,</p>
+    <p>The Car Service Site Team</p>
+  `,
+  });
+};

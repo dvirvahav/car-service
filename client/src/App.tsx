@@ -5,7 +5,8 @@ import { Forgot } from './pages/forgot/forgot';
 import { Home } from './pages/home/home';
 import { Login } from './pages/login/login';
 import { Signup } from './pages/signup/signup';
-
+import { Error } from './pages/error/error';
+import { ResetPasswordPage } from './pages/forgot/resetPassword';
 export const App: FC = () => {
   return (
     <Router>
@@ -16,9 +17,14 @@ export const App: FC = () => {
           <Route path='/contact' element={<Contact />} />
           <Route path='/forgot' element={<Forgot />} />
           <Route path='/home' element={<Home />} />
+          <Route
+            path='/reset-password/:token'
+            element={<ResetPasswordPage />}
+          />
+
+          <Route path='*' element={<Error />} />
         </Routes>
       </Fragment>
     </Router>
   );
 };
-// <Route path='*' element={<Error />} />
