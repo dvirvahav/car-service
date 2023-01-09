@@ -1,7 +1,20 @@
+import Axios from 'axios';
 import { MDBInput } from 'mdb-react-ui-kit';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 
 export const Forgot: FC = () => {
+  const [email, setEmail] = useState<string>('');
+
+  const handleSubmit = () => {
+    Axios.post('/api/resetPassword', { mail: email })
+      .then((response) => {
+        if (response.data) alert('Success!');
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
+
   return (
     <div>
       <section className='vh-100'>
@@ -15,7 +28,7 @@ export const Forgot: FC = () => {
               />
             </div>
             <div className='col-md-8 col-lg-6 col-xl-4 offset-xl-1'>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <h1 className='display-3  start-50  position-relative translate-middle'>
                   Forgot your password?
                 </h1>
@@ -28,6 +41,10 @@ export const Forgot: FC = () => {
                     id='formControlLg'
                     type='email'
                     size='lg'
+                    value={email}
+                    onChange={(event) => {
+                      setEmail(event.target.value);
+                    }}
                   />
                 </div>
 
