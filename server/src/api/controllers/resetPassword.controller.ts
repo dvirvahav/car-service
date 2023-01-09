@@ -9,8 +9,16 @@ export const resetPasswordController =
     const email: string = request.body.mail;
     const token = generateToken();
 
-    db('users').where({ email }).update({ resetToken: token });
-    sendPasswordResetEmail(email, token);
+    db('users')
+      .where({ email })
+      .update({ reset_token: token })
+      .then((numUpdated) => {
+        if (numUpdated === 0) response.send('User not found!');
+        else {
+          sendPasswordResetEmail(email, token);
+          response.status(200).send('Mail has been sent successfully!');
+        }
+      });
   };
 
 export const setNewPasswordController =
