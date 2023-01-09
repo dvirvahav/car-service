@@ -50,7 +50,7 @@ export const Forgot: FC = () => {
 
                 <div className='text-center text-lg-start mt-4 pt-2 '>
                   <button
-                    type='button'
+                    type='submit'
                     className='btn btn-primary btn-lg btn-block'>
                     Reset Password
                   </button>
