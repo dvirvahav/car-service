@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-export const reCaptchaService = (reCaptcha: string) => {
+export const reCaptchaService = (reCaptcha: string): boolean => {
   Axios.post(
     `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.REACT_APP_SERVER_KEY}&response=${reCaptcha}`,
     {
@@ -10,10 +10,12 @@ export const reCaptchaService = (reCaptcha: string) => {
   )
     .then((responseFromGoogle) => {
       // Check the response from the server
-      if (responseFromGoogle.data.success) responseFromGoogle.data.success;
+      if (responseFromGoogle.data.success) {
+        console.log('captcha works!');
+      }
     })
     .catch((error) => {
-      return error;
+      console.log(error);
     });
-  return 'Axios error';
+  return false;
 };

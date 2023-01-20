@@ -46,6 +46,7 @@ export const Signup: FC = () => {
         passwordValidator.length === 0 &&
         state.password === state.verifyPassword
       ) {
+        console.log('Sending signup details!');
         Axios.post('/api/signup', {
           mail: state.mail,
           firstName: state.firstName,
@@ -54,6 +55,7 @@ export const Signup: FC = () => {
           reCaptcha: reRef.current?.getValue(),
         })
           .then((response) => {
+            console.log('Successfull signup!');
             setSuccessfulSignUp(true);
 
             if (response.data !== 'Error') {
@@ -70,7 +72,7 @@ export const Signup: FC = () => {
   return (
     <div>
       <section className='vh-100'>
-        <div className='container-fluid h-custom'>
+        <div className='p-3 my-5 h-custom loading-medium '>
           <div className='row d-flex justify-content-center align-items-center '>
             <div className='col-md-9 col-lg-6 col-xl-5'>
               <img

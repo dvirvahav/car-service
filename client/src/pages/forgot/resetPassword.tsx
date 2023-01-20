@@ -1,13 +1,15 @@
 import Axios from 'axios';
+import md5 from 'md5';
 import { FC, useState } from 'react';
-
+import { useLocation } from 'react-router-dom';
 export const ResetPasswordPage: FC = () => {
-  const token = new URLSearchParams(window.location.search).get('token');
+  const location = useLocation();
+  const token = location.pathname.split('/').pop();
   const [newPassword, setNewPassword] = useState<string>('');
 
   const handleSubmit = () => {
     Axios.post(`/api/resetPassword/${token}`, {
-      password: newPassword,
+      password: md5(newPassword),
     }).then((response) => {
       if (response.data.error) {
         alert(response.data.error);
@@ -20,7 +22,7 @@ export const ResetPasswordPage: FC = () => {
   return (
     <div>
       <section className='vh-100'>
-        <div className='container py-5 h-100'>
+        <div className='p-3 my-5 h-custom loading-medium'>
           <div className='row d-flex align-items-center justify-content-center h-100'>
             <div className='col-md-8 col-lg-7 col-xl-6'>
               <img
@@ -54,7 +56,7 @@ export const ResetPasswordPage: FC = () => {
                 <button
                   type='submit'
                   className='btn btn-primary btn-lg btn-block'>
-                  Sign in
+                  Reset Password
                 </button>
               </form>
             </div>

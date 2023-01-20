@@ -1,0 +1,14 @@
+.big-logo {
+  width: 300px;
+  height: auto;
+}
+.big-car {
+  width: 250px;
+  height: auto;
+}
+.small-image {
+  width: 100px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}

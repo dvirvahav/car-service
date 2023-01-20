@@ -18,7 +18,7 @@ export const Forgot: FC = () => {
   return (
     <div>
       <section className='vh-100'>
-        <div className='container-fluid h-custom'>
+        <div className='p-3 my-5 h-custom loading-medium'>
           <div className='row d-flex justify-content-center align-items-center'>
             <div className='col-md-9 col-lg-6 col-xl-5'>
               <img

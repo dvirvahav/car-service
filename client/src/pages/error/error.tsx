@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 export const Error: FC = () => {
   return (
-    <div className='d-flex align-items-center justify-content-center '>
+    <div className='d-flex align-items-center justify-content-center p-3 my-8 h-custom loading-medium  '>
       <div className='text-center'>
         <h1 className='display-1 fw-bold'>404</h1>
         <p className='fs-2'>

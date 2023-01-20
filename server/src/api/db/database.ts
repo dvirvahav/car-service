@@ -1,6 +1,7 @@
 import knex, { Knex } from 'knex';
 import * as dotenv from 'dotenv';
 dotenv.config();
+
 export const db: Knex<any, unknown[]> = knex({
   client: 'pg',
   connection: {

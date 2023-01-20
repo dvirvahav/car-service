@@ -1,0 +1,44 @@
+thead {
+  position: sticky;
+  top: -10;
+}
+
+.app-dec-wrapper button {
+  font-size: 10px;
+  margin: 1px;
+  box-shadow: 0 2px 6px 1px #e1e5e8;
+  border: none;
+  background-color: white;
+  display: inline-block;
+  cursor: pointer;
+  transition: 0.6s;
+}
+.app-dec-wrapper button:hover {
+  background-color: rgb(236, 255, 255);
+}
+
+.table-wrapper {
+  box-shadow: 0 2px 6px 1px #e1e5e8;
+  overflow-x: hidden;
+  margin-top: 20px;
+  height: 400px;
+  font-size: 12px;
+}
+.score-a {
+  color: #fff;
+  background-color: rgb(22, 167, 75);
+  border-radius: 5px;
+  padding: 2px;
+}
+.score-b {
+  color: #fff;
+  background-color: rgb(203, 198, 26);
+  border-radius: 5px;
+  padding: 2px;
+}
+.score-c {
+  color: #fff;
+  background-color: #e88d96;
+  padding: 2px;
+  border-radius: 5px;
+}

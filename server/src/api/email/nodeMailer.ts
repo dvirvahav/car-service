@@ -3,7 +3,7 @@ import { Transporter, createTransport } from 'nodemailer';
 const mailService: Transporter = createTransport({
   service: 'outlook',
   auth: {
-    user: process.env.MAIL,
+    user: process.env.MAIL_SERVICE,
     pass: process.env.DB_PASSWORD,
   },
 
@@ -11,13 +11,14 @@ const mailService: Transporter = createTransport({
     ciphers: 'SSLv3',
   },
 });
+
 export const welcomeMail = (
   clientMail: string,
   firstName: string,
   lastName: string
 ) => {
   mailService.sendMail({
-    from: process.env.MAIL,
+    from: process.env.MAIL_SERVICE,
     to: clientMail,
     subject: 'Welcome to Our Car Service Site!',
     html: `
@@ -39,18 +40,22 @@ export const welcomeMail = (
   });
 };
 
-export const sendPasswordResetEmail = (clientMail: string, token: string) => {
-  mailService.sendMail({
-    from: process.env.MAIL,
-    to: clientMail,
-    subject: 'Password Reset Request',
-    html: `
+export const sendPasswordResetEmail = (
+  clientMail: string,
+  token: string
+): string => {
+  mailService
+    .sendMail({
+      from: process.env.MAIL_SERVICE,
+      to: clientMail,
+      subject: `Password Reset Request for ${clientMail}`,
+      html: `
     
     <p> We received a request to reset the password for your account. If you made this request, 
     please follow the instructions below to reset your password.</p>
     <p>Here's a quick overview of what you can expect:</p>
     <ul>
-      <li>Click on the following link to access the password reset page: https://car-service-nine.vercel.app//reset-password/${token}</li>
+      <li>Click on the following link to access the password reset page: https://car-service-dvirvahav.vercel.app//resetPassword/${token}</li>
       <li>Enter your email address and the new password you would like to use.</li>
       <li>Click "Reset Password" to complete the process.</li>
     </ul>
@@ -58,5 +63,14 @@ export const sendPasswordResetEmail = (clientMail: string, token: string) => {
     <p>Thank you,</p>
     <p>The Car Service Site Team</p>
   `,
-  });
+    })
+    .then((response) => {
+      console.log(response);
+      return 'success';
+    })
+    .catch((error) => {
+      console.log('Error' + error);
+      return 'error';
+    });
+  return '';
 };

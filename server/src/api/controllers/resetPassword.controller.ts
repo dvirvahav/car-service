@@ -7,7 +7,7 @@ import { sendPasswordResetEmail } from '../email/nodeMailer';
 export const resetPasswordController =
   (db: Knex<any, unknown[]>) => (request: Request, response: Response) => {
     const email: string = request.body.mail;
-    const token = generateToken();
+    const token: string = generateToken();
 
     db('users')
       .where({ email })
@@ -15,8 +15,9 @@ export const resetPasswordController =
       .then((numUpdated) => {
         if (numUpdated === 0) response.send('User not found!');
         else {
-          sendPasswordResetEmail(email, token);
-          response.status(200).send('Mail has been sent successfully!');
+          sendPasswordResetEmail(email, token) === 'success'
+            ? response.status(200).send('Mail has been sent successfully!')
+            : response.status(400).send('Login error credentials');
         }
       });
   };
@@ -27,20 +28,27 @@ export const setNewPasswordController =
     const { password } = request.body;
 
     db('users')
-      .where({ resetToken: token })
       .first()
+      .where({ reset_token: token })
+
       .then((user) => {
         if (!user) {
           response.status(400).send({ error: 'Token not found' });
+          console.log('no such user!');
+        } else {
+          db('users')
+            .where({ reset_token: token })
+            .update({ password: password, reset_token: null })
+            .returning('*')
+            .then((updatedResults) => {
+              console.log(updatedResults);
+              response.send({ success: true });
+            });
         }
-
-        db('users')
-          .where({ resetToken: token })
-          .update({ password, resetToken: null });
       })
-      .then(() => response.send({ success: true }))
+
       .catch((err) => {
-        console.error(err);
+        console.error('here' + err);
         response.status(500).send({ error: 'Error finding user' });
       });
   };
