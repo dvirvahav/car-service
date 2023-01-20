@@ -45,61 +45,61 @@ export default function DataGridDemo() {
       sortable: false,
       filterable: false,
       hideable: false,
-      //   renderCell: (params) => {
-      //     const onDelete = (e: { stopPropagation: () => void }) => {
-      //       e.stopPropagation(); // don't select this row after clicking
+      renderCell: (params) => {
+        const onDelete = (e: { stopPropagation: () => void }) => {
+          e.stopPropagation(); // don't select this row after clicking
 
-      //       const apiData: GridApi = params.api;
-      //       const thisRow: Record<string, GridCellValue> = {};
+          const apiData: GridApi = params.api;
+          const thisRow: Record<string, GridCellValue> = {};
 
-      //       apiData
-      //         .getAllColumns()
-      //         .filter((c: any) => c.field !== '__check__' && !!c)
-      //         .forEach(
-      //           (c: any) =>
-      //             (thisRow[c.field] = params.getValue(params.id, c.field))
-      //         );
+          apiData
+            .getAllColumns()
+            .filter((c: any) => c.field !== '__check__' && !!c)
+            .forEach(
+              (c: any) =>
+                (thisRow[c.field] = params.getValue(params.id, c.field))
+            );
 
-      //       api
-      //         .deleteTreatment(
-      //           String(thisRow['id']),
-      //           String(localStorage.getItem('email')),
-      //           md5(String(localStorage.getItem('password')))
-      //         )
-      //         .then(() => window.location.reload());
-      //     };
-      //     const onSave = (e: { stopPropagation: () => void }) => {
-      //       e.stopPropagation(); // don't select this row after clicking
+          api
+            .deleteTreatment(
+              String(thisRow['id']),
+              String(localStorage.getItem('email')),
+              md5(String(localStorage.getItem('password')))
+            )
+            .then(() => window.location.reload());
+        };
+        const onSave = (e: { stopPropagation: () => void }) => {
+          e.stopPropagation(); // don't select this row after clicking
 
-      //       const apiData: GridApi = params.api;
-      //       const thisRow: Record<string, GridCellValue> = {};
+          const apiData: GridApi = params.api;
+          const thisRow: Record<string, GridCellValue> = {};
 
-      //       apiData
-      //         .getAllColumns()
-      //         .filter((c: any) => c.field !== '__check__' && !!c)
-      //         .forEach(
-      //           (c: any) =>
-      //             (thisRow[c.field] = params.getValue(params.id, c.field))
-      //         );
-      //       const { id, info, worker_email, car_id } = thisRow;
-      //       api
-      //         .updateTreatment(
-      //           String(id),
-      //           String(localStorage.getItem('email')),
-      //           md5(String(localStorage.getItem('password'))),
-      //           String(info),
-      //           String(worker_email),
-      //           String(car_id)
-      //         )
-      //         .then(() => window.location.reload());
-      //     };
-      //     return (
-      //       <div>
-      //         <Button onClick={onSave}>Save</Button>
-      //         <Button onClick={onDelete}>Delete</Button>
-      //       </div>
-      //     );
-      //   },
+          apiData
+            .getAllColumns()
+            .filter((c: any) => c.field !== '__check__' && !!c)
+            .forEach(
+              (c: any) =>
+                (thisRow[c.field] = params.getValue(params.id, c.field))
+            );
+          const { id, info, worker_email, car_id } = thisRow;
+          api
+            .updateTreatment(
+              String(id),
+              String(localStorage.getItem('email')),
+              md5(String(localStorage.getItem('password'))),
+              String(info),
+              String(worker_email),
+              String(car_id)
+            )
+            .then(() => window.location.reload());
+        };
+        return (
+          <div>
+            <Button onClick={onSave}>Save</Button>
+            <Button onClick={onDelete}>Delete</Button>
+          </div>
+        );
+      },
     },
   ];
   const { treatments, setTreatments } = useTreatmentsContext();
@@ -119,14 +119,21 @@ export default function DataGridDemo() {
     <Box sx={{ height: 400, width: '100%' }}>
       <DataGrid
         className='loading-medium'
-        rows={treatments}
+        rows={treatments.map((item, index) => [
+          {
+            id: item.id,
+            info: item.info,
+            date: item.date,
+            worker_email: item.worker_email,
+            car_id: item.car_id,
+          },
+        ])}
         columns={columns}
         pageSize={pageSize}
         onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
         rowsPerPageOptions={[5, 10, 20, 50, 100]}
         disableSelectionOnClick
         experimentalFeatures={{ newEditingApi: true }}
-        getRowId={(row: any) => row.id}
       />
     </Box>
   );
