@@ -17,9 +17,11 @@ export const createApiClient = (): ApiClient => {
     },
     deleteTreatment: (id: string, email: string, password: string) => {
       return axios
-        .get(
-          `/api/deleteTreatment?id=${id}&email=${email}&password=${password}`
-        )
+        .post(`/api/deleteTreatment`, {
+          id: id,
+          email: email,
+          password: password,
+        })
         .then((res) => {
           console.log(res.data);
           return res.data;
@@ -35,9 +37,14 @@ export const createApiClient = (): ApiClient => {
       car_id: string
     ) => {
       return axios
-        .get(
-          `/api/updateTreatment?info=${info}&car_id=${car_id}&worker_email=${worker_email}&id=${id}&email=${email}&password=${password}`
-        )
+        .post('/api/updateTreatment', {
+          info: info,
+          car_id: car_id,
+          worker_email: worker_email,
+          id: id,
+          email: email,
+          password: password,
+        })
         .then((res) => {
           console.log(res.data);
           return res.data;

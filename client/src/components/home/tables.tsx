@@ -66,7 +66,10 @@ export default function DataGridDemo() {
               String(localStorage.getItem('email')),
               md5(String(localStorage.getItem('password')))
             )
-            .then(() => window.location.reload());
+            .then(() => {
+              console.log('delete: Data loaded successfully ');
+              window.location.reload();
+            });
         };
         const onSave = (e: { stopPropagation: () => void }) => {
           e.stopPropagation(); // don't select this row after clicking
@@ -92,7 +95,7 @@ export default function DataGridDemo() {
               String(car_id)
             )
             .then(() => {
-              alert('Data loaded succesfully ');
+              console.log('update: Data loaded successfully ');
               console.log(treatments);
               window.location.reload();
             });
@@ -114,7 +117,7 @@ export default function DataGridDemo() {
         String(localStorage.getItem('email')),
         md5(String(localStorage.getItem('password')))
       );
-      alert('Data loaded succesfully ');
+      console.log('refresh: Data loaded successfully ');
       console.log(data);
       setTreatments(data);
     }
@@ -132,7 +135,7 @@ export default function DataGridDemo() {
         rowsPerPageOptions={[5, 10, 20, 50, 100]}
         disableSelectionOnClick
         experimentalFeatures={{ newEditingApi: true }}
-        getRowId={(row) => Math.random()}
+        getRowId={(row: any) => (row.id ? row.id : Math.random())}
       />
     </Box>
   );

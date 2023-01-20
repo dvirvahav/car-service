@@ -68,14 +68,14 @@ app.post('/api/treatment', (req, responseToClient) => {
     });
 });
 
-app.get('/api/updateTreatment', (req, responseToClient) => {
-  const id: number = Number(req.query.id);
-  const email: string = String(req.query.email);
-  const password: string = String(req.query.password);
+app.post('/api/updateTreatment', (req, responseToClient) => {
+  const id: number = Number(req.body.id);
+  const email: string = String(req.body.email);
+  const password: string = String(req.body.password);
 
-  const info: string = String(req.query.info);
-  const car_id: string = String(req.query.car_id);
-  const worker_email: string = String(req.query.worker_email);
+  const info: string = String(req.body.info);
+  const car_id: string = String(req.body.car_id);
+  const worker_email: string = String(req.body.worker_email);
   console.log(info, car_id, worker_email);
   console.log('update treatment');
   db('treatments')
@@ -132,10 +132,10 @@ app.get('/api/updateTreatment', (req, responseToClient) => {
     });
 });
 
-app.get('/api/deleteTreatment', (req, responseToClient) => {
-  const id: number = Number(req.query.id);
-  const email: string = String(req.query.email);
-  const password: string = String(req.query.password);
+app.post('/api/deleteTreatment', (req, responseToClient) => {
+  const id: number = Number(req.body.id);
+  const email: string = String(req.body.email);
+  const password: string = String(req.body.password);
 
   console.log(email + '' + password);
   console.log('delete treatment: ');
