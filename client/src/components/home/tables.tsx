@@ -119,15 +119,7 @@ export default function DataGridDemo() {
     <Box sx={{ height: 400, width: '100%' }}>
       <DataGrid
         className='loading-medium'
-        rows={treatments.map((item, index) => [
-          {
-            id: item.id ? item.id : index,
-            info: item.info,
-            date: item.date,
-            worker_email: item.worker_email,
-            car_id: item.car_id,
-          },
-        ])}
+        rows={treatments}
         columns={columns}
         pageSize={pageSize}
         onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
