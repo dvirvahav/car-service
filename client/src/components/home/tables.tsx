@@ -126,7 +126,7 @@ export default function DataGridDemo() {
         rowsPerPageOptions={[5, 10, 20, 50, 100]}
         disableSelectionOnClick
         experimentalFeatures={{ newEditingApi: true }}
-        key={Math.random()}
+        getRowId={(row: any) => `${row.id}_${row.car_id}}`}
       />
     </Box>
   );
