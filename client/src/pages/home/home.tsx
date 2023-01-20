@@ -6,6 +6,7 @@ import Popup from 'reactjs-popup';
 import { PopupActions } from 'reactjs-popup/dist/types';
 import { createApiClient } from '../../api/api';
 import DataGridDemo from '../../components/home/tables';
+import './home.css';
 const api = createApiClient();
 export const Home: FC = () => {
   const [info, setInfo] = useState('');

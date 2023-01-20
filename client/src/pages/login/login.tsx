@@ -24,6 +24,7 @@ export const Login: FC = () => {
       localStorage.getItem('password') &&
       localStorage.getItem('rememberMe')
     ) {
+      alert('Login success!');
       nav('/home');
     }
   });
@@ -43,7 +44,7 @@ export const Login: FC = () => {
           lastName: 'Check',
           firstName: 'Check2',
         });
-        setTreatments(response.data);
+        // setTreatments(response.data);
         localStorage.setItem('email', email);
         localStorage.setItem('password', password);
         rememberMe

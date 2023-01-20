@@ -91,7 +91,11 @@ export default function DataGridDemo() {
               String(worker_email),
               String(car_id)
             )
-            .then(() => window.location.reload());
+            .then(() => {
+              alert('Data loaded succesfully ');
+              console.log(treatments);
+              window.location.reload();
+            });
         };
         return (
           <div>
@@ -110,6 +114,8 @@ export default function DataGridDemo() {
         String(localStorage.getItem('email')),
         md5(String(localStorage.getItem('password')))
       );
+      alert('Data loaded succesfully ');
+      console.log(data);
       setTreatments(data);
     }
     fetchTreatments();
