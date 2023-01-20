@@ -31,7 +31,7 @@ export const Login: FC = () => {
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
-    Axios.post('http://localhost:3001/api/login', {
+    Axios.post('/api/login', {
       email: email,
       password: md5(password),
       reCaptcha: reRef.current?.getValue(),
