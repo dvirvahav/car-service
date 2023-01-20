@@ -121,7 +121,7 @@ export default function DataGridDemo() {
         className='loading-medium'
         rows={treatments.map((item, index) => [
           {
-            id: item.id,
+            id: item.id ? item.id : index,
             info: item.info,
             date: item.date,
             worker_email: item.worker_email,
