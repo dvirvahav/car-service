@@ -5,7 +5,10 @@ export const createApiClient = (): ApiClient => {
   return {
     getTreatments: (email: string, password: string) => {
       return axios
-        .get(`/api/treatment?email=${email}&password=${password}`)
+        .post('/api/treatment', {
+          email: email,
+          password: password,
+        })
         .then((res) => {
           console.log(res.data);
           return res.data;
