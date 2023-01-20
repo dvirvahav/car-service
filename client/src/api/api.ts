@@ -6,14 +6,22 @@ export const createApiClient = (): ApiClient => {
     getTreatments: (email: string, password: string) => {
       return axios
         .get(`/api/treatment?email=${email}&password=${password}`)
-        .then((res) => res.data);
+        .then((res) => {
+          console.log(res.data);
+          return res.data;
+        })
+        .catch((error) => console.log(error));
     },
     deleteTreatment: (id: string, email: string, password: string) => {
       return axios
         .get(
           `/api/deleteTreatment?id=${id}&email=${email}&password=${password}`
         )
-        .then((res) => res.data);
+        .then((res) => {
+          console.log(res.data);
+          return res.data;
+        })
+        .catch((error) => console.log(error));
     },
     updateTreatment: (
       id: string,
@@ -27,7 +35,11 @@ export const createApiClient = (): ApiClient => {
         .get(
           `/api/updateTreatment?info=${info}&car_id=${car_id}&worker_email=${worker_email}&id=${id}&email=${email}&password=${password}`
         )
-        .then((res) => res.data);
+        .then((res) => {
+          console.log(res.data);
+          return res.data;
+        })
+        .catch((error) => console.log(error));
     },
   };
 };

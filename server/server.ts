@@ -53,7 +53,7 @@ app.get('/api/treatment', (req, responseToClient) => {
           .where('user_email', email)
           .then((rows) => {
             console.log('Get treatment: Found user! sending data....');
-            responseToClient.status(200).send(rows);
+            responseToClient.send(rows);
           })
           .catch((error) => {
             console.log(error);
