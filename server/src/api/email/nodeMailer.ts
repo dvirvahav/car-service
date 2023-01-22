@@ -62,7 +62,7 @@ export const sendPasswordResetEmail = (
       to: clientMail,
       subject: `Password Reset Request for ${clientMail}`,
       html: `
-
+      <img src='https://i.ibb.co/YN483kn/logo.png' alt='center image' /><br/>
 <p> We received a request to reset the password for your account. If you made this request, 
 please follow the instructions below to reset your password.</p>
 <p>Here's a quick overview of what you can expect:</p>
@@ -76,8 +76,8 @@ please follow the instructions below to reset your password.</p>
 <p>The Car Service Site Team</p>
 `,
     })
-    .then((response) => {
-      console.log(response);
+    .then(() => {
+      console.log('Mail has been sent successfully!');
       response.status(200).send();
     })
     .catch((error) => {

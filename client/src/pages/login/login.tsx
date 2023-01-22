@@ -14,7 +14,6 @@ export const Login: FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const { setUser } = useUserContext();
-  const { setTreatments } = useTreatmentsContext();
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const reRef = useRef<ReCAPTCHA>(null);
 
@@ -37,7 +36,7 @@ export const Login: FC = () => {
       password: md5(password),
       reCaptcha: reRef.current?.getValue(),
     })
-      .then((response) => {
+      .then(() => {
         setUser({
           password: md5(password),
           mail: email,

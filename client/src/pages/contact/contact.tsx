@@ -5,7 +5,7 @@ export const Contact: FC = () => {
     <div className='container logo'>
       <div className='row'>
         <div className='col-md-12 text-center'>
-          <img src='https://i.ibb.co/YN483kn/logo.png' alt='center image' />
+          <img src='https://i.ibb.co/YN483kn/logo.png' alt='Logo' />
         </div>
       </div>
       <div className='row'>

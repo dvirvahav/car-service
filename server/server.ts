@@ -10,8 +10,9 @@ import {
   setNewPasswordController,
 } from './src/api/controllers/resetPassword.controller';
 import { db } from './src/api/db/database';
-const port = process.env.PORT || 3001;
 export const app = Express();
+const port = process.env.PORT || 3001;
+
 //production
 //
 app.use(Express.static(path.join(__dirname, 'public')));
@@ -25,13 +26,6 @@ app.use(cors());
 db.raw('SELECT NOW()')
   .then((result) => console.log(`Connection successful: ${result.rows[0].now}`))
   .catch((error) => console.error(`Error connecting to database: ${error}`));
-
-//production
-app.get('/reset-password/', (request, response) => {
-  // Send the resetPassword.html file as the response
-  response.sendFile(path.join(__dirname + 'api/view/resetPassword.html'));
-});
-//END production
 
 app.post('/api/resetPassword/:token', setNewPasswordController(db));
 app.post('/api/resetPassword', resetPasswordController(db));
@@ -187,3 +181,10 @@ app.listen(port, () => {
 });
 
 module.exports = app;
+
+//production
+// app.get('/reset-password/', (request, response) => {
+//   // Send the resetPassword.html file as the response
+//   response.sendFile(path.join(__dirname + 'api/view/resetPassword.html'));
+// });
+//END production
