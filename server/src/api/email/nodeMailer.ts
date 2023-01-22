@@ -47,7 +47,7 @@ export const welcomeMail = (
     })
     .catch((error) => {
       console.log(`Mail hasn't been sent successfully`);
-      response.status(400).send(error);
+      response.status(400).send(`Mail hasn't been sent successfully`);
     });
 };
 
