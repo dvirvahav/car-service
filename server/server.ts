@@ -181,10 +181,3 @@ app.listen(port, () => {
 });
 
 module.exports = app;
-
-//production
-// app.get('/reset-password/', (request, response) => {
-//   // Send the resetPassword.html file as the response
-//   response.sendFile(path.join(__dirname + 'api/view/resetPassword.html'));
-// });
-//END production
