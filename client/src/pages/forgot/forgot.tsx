@@ -8,10 +8,10 @@ export const Forgot: FC = () => {
   const handleSubmit = () => {
     Axios.post('/api/resetPassword', { mail: email })
       .then((response) => {
-        if (response.data) alert('Success!');
+        console.log('Mail has been sent successfully');
       })
       .catch((error) => {
-        alert(error);
+        console.log(error);
       });
   };
 

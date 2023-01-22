@@ -13,13 +13,14 @@ export const resetPasswordController =
       .where({ email })
       .update({ reset_token: token })
       .then((numUpdated) => {
-        if (numUpdated === 0) response.send('User not found!');
+        if (numUpdated === 0) response.status(404).send('User not found!');
         else {
           sendPasswordResetEmail(email, token, response);
         }
       })
-      .catch((error) => {
-        console.log('Something went wrong with insert new user: ' + error);
+      .catch(() => {
+        console.log('Something went wrong with insert the token ');
+        response.status(400).send('Something went wrong with insert the token');
       });
   };
 

@@ -1,13 +1,12 @@
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
-import { FC, useRef, useState } from 'react';
+import { MDBBtn, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
+import md5 from 'md5';
 import React from 'react';
 import Axios from 'axios';
-import { MDBBtn, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
+import { FC, useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { useTreatmentsContext } from '../../context/treatments';
 import { useUserContext } from '../../context/user';
 import { useNavigate } from 'react-router-dom';
-import md5 from 'md5';
 
 export const Login: FC = () => {
   const nav = useNavigate();
