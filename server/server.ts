@@ -10,15 +10,15 @@ import {
   setNewPasswordController,
 } from './src/api/controllers/resetPassword.controller';
 import { db } from './src/api/db/database';
-
+const port = process.env.PORT || 3001;
 export const app = Express();
 //production
-const port = process.env.PORT || 3001;
+//
 app.use(Express.static(path.join(__dirname, 'public')));
 app.get('*', (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
-//END production
+// //END production
 app.use(bodyParser.json());
 app.use(cors());
 

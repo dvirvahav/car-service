@@ -55,7 +55,7 @@ export const Signup: FC = () => {
           reCaptcha: reRef.current?.getValue(),
         })
           .then((response) => {
-            console.log('Successfull signup!');
+            console.log('Successfully sign up!');
             setSuccessfulSignUp(true);
 
             if (response.data !== 'Error') {

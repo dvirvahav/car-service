@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import { Request, Response } from 'express';
 import { Knex } from 'knex';
-import { welcomeMail } from '../email/nodeMailer';
+import { mailService, welcomeMail } from '../email/nodeMailer';
 import { reCaptchaService } from '../services/recaptcha.service';
 
 export const signupController =
@@ -31,9 +31,9 @@ export const signupController =
               password: password,
             })
             .then(() => {
-              console.log('Hell yeah!');
+              console.log(`${mail} has been created in DB, sending mail...`);
+              welcomeMail(mail, firstName, lastName, response);
               response.status(200);
-              welcomeMail(mail, firstName, lastName);
             })
             .catch((err) => {
               console.error(err);

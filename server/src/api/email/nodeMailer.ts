@@ -1,6 +1,6 @@
 import { Transporter, createTransport } from 'nodemailer';
-
-const mailService: Transporter = createTransport({
+import { Response } from 'express';
+export const mailService: Transporter = createTransport({
   service: 'outlook',
   auth: {
     user: process.env.MAIL_SERVICE,
@@ -15,16 +15,19 @@ const mailService: Transporter = createTransport({
 export const welcomeMail = (
   clientMail: string,
   firstName: string,
-  lastName: string
+  lastName: string,
+  response: Response
 ) => {
-  mailService.sendMail({
-    from: process.env.MAIL_SERVICE,
-    to: clientMail,
-    subject: 'Welcome to Our Car Service Site!',
-    html: `
+  mailService
+    .sendMail({
+      from: process.env.MAIL_SERVICE,
+      to: clientMail,
+      subject: 'Welcome to Our Car Service Site!',
+      html: `
     <h1>Congratulations ${
       firstName + ' ' + lastName
-    }! your account has been created successfully!</h1>
+    }! your account has been created successfully!</h1> <br/>
+    <img src='https://i.ibb.co/YN483kn/logo.png' alt='center image' /><br/>
     <p>Thank you for choosing our car service site to take care of all of your vehicle needs. We're excited to have you on board and can't wait to get started.</p>
     <p>Here's a quick overview of what you can expect:</p>
     <ul>
@@ -37,40 +40,48 @@ export const welcomeMail = (
     <p>Best regards,</p>
     <p>The Car Service Site Team</p>
   `,
-  });
+    })
+    .then(() => {
+      response.status(200).send();
+      console.log('Mail has been sent successfully');
+    })
+    .catch((error) => {
+      console.log(`Mail hasn't been sent successfully`);
+      response.status(400).send(error);
+    });
 };
 
 export const sendPasswordResetEmail = (
   clientMail: string,
-  token: string
-): string => {
+  token: string,
+  response: Response
+) => {
   mailService
     .sendMail({
       from: process.env.MAIL_SERVICE,
       to: clientMail,
       subject: `Password Reset Request for ${clientMail}`,
       html: `
-    
-    <p> We received a request to reset the password for your account. If you made this request, 
-    please follow the instructions below to reset your password.</p>
-    <p>Here's a quick overview of what you can expect:</p>
-    <ul>
-      <li>Click on the following link to access the password reset page: https://car-service-dvirvahav.vercel.app//resetPassword/${token}</li>
-      <li>Enter your email address and the new password you would like to use.</li>
-      <li>Click "Reset Password" to complete the process.</li>
-    </ul>
-    <p>If you did not request a password reset, please ignore this email and your password will remain unchanged.</p>
-    <p>Thank you,</p>
-    <p>The Car Service Site Team</p>
-  `,
+
+<p> We received a request to reset the password for your account. If you made this request, 
+please follow the instructions below to reset your password.</p>
+<p>Here's a quick overview of what you can expect:</p>
+<ul>
+<li>Click on the following link to access the password reset page: https://car-service-dvirvahav.vercel.app//resetPassword/${token}</li>
+<li>Enter your email address and the new password you would like to use.</li>
+<li>Click "Reset Password" to complete the process.</li>
+</ul>
+<p>If you did not request a password reset, please ignore this email and your password will remain unchanged.</p>
+<p>Thank you,</p>
+<p>The Car Service Site Team</p>
+`,
     })
     .then((response) => {
       console.log(response);
-      return 'success';
+      response.status(200).send();
     })
     .catch((error) => {
-      console.log('Error' + error);
-      return 'error';
+      console.log('Error sending mail .. ' + error);
+      response.status(400).send(error);
     });
-  return '';
 };
