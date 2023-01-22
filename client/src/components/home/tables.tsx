@@ -1,11 +1,10 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import { DataGrid, GridApi, GridCellValue, GridColDef } from '@mui/x-data-grid';
 import './tables.css';
-import { useTreatmentsContext } from '../../context/treatments';
-import Button from '@mui/material/Button';
-import { createApiClient } from '../../api/api';
+import * as React from 'react';
 import md5 from 'md5';
+import { createApiClient } from '../../api/api';
+import Button from '@mui/material/Button';
+import { useTreatmentsContext } from '../../context/treatments';
+import { DataGrid, GridApi, GridCellValue, GridColDef } from '@mui/x-data-grid';
 
 const api = createApiClient();
 
