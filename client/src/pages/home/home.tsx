@@ -1,7 +1,7 @@
 import md5 from 'md5';
 import React, { useRef, useState } from 'react';
 import { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 import { PopupActions } from 'reactjs-popup/dist/types';
 import { createApiClient } from '../../api/api';
@@ -14,6 +14,7 @@ export const Home: FC = () => {
   const [carId, setCarId] = useState('');
   const nav = useNavigate();
   const popupRef = useRef<PopupActions>(null);
+
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     api
@@ -50,10 +51,11 @@ export const Home: FC = () => {
       <Popup ref={popupRef} modal>
         <div className='alert popup text-center'>
           {' '}
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className='form-group'>
             <label>
               car ID:
               <input
+                className='form-control'
                 type='text'
                 value={carId}
                 onChange={(e) => setCarId(e.target.value)}
@@ -63,6 +65,7 @@ export const Home: FC = () => {
             <label>
               Info:
               <input
+                className='form-control'
                 type='text'
                 value={info}
                 onChange={(e) => setInfo(e.target.value)}
@@ -73,6 +76,7 @@ export const Home: FC = () => {
             <label>
               Worker Email:
               <input
+                className='form-control'
                 type='text'
                 value={workerMail}
                 onChange={(e) => setWorkerMail(e.target.value)}
@@ -99,12 +103,8 @@ export const Home: FC = () => {
               </div>
             </div>
             <div className='d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom'></div>
-
             <h2>Car service</h2>
-
-            <div className='table-responsive'>
-              <DataGridDemo />
-            </div>
+            <br /> <DataGridDemo />
             <button
               style={{
                 backgroundColor: '#3b71ca',

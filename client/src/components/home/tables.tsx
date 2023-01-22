@@ -125,18 +125,16 @@ export default function DataGridDemo() {
   }, [setTreatments]);
 
   return (
-    <Box sx={{ height: 400, width: '100%' }}>
-      <DataGrid
-        className='loading-medium'
-        rows={treatments}
-        columns={columns}
-        pageSize={pageSize}
-        onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-        rowsPerPageOptions={[5, 10, 20, 50, 100]}
-        disableSelectionOnClick
-        experimentalFeatures={{ newEditingApi: true }}
-        getRowId={(row: any) => (row.id ? row.id : Math.random())}
-      />
-    </Box>
+    <DataGrid
+      className='loading-medium'
+      rows={treatments}
+      columns={columns}
+      pageSize={pageSize}
+      onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+      rowsPerPageOptions={[5, 10, 20, 50, 100]}
+      disableSelectionOnClick
+      experimentalFeatures={{ newEditingApi: true }}
+      getRowId={(row: any) => (row.id ? row.id : Math.random())}
+    />
   );
 }

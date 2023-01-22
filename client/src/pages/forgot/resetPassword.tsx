@@ -46,10 +46,12 @@ export const ResetPasswordPage: FC = () => {
           .then((response) => {
             console.log(response);
             setSuccessfulSignUp(true);
-
-            navigate('/login');
+            navigate('/');
           })
-          .catch(() => {});
+          .catch(() => {
+            setSuccessfulSignUp(false);
+            setErrors(['Something wen wrong..']);
+          });
     }
   };
 
