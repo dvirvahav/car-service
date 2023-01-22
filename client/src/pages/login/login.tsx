@@ -16,16 +16,16 @@ export const Login: FC = () => {
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const reRef = useRef<ReCAPTCHA>(null);
 
-  window.addEventListener('load', function () {
-    if (
-      localStorage.getItem('email') &&
-      localStorage.getItem('password') &&
-      localStorage.getItem('rememberMe')
-    ) {
-      alert('Login success!');
-      nav('/home');
-    }
-  });
+  // window.addEventListener('load', function () {
+  //   if (
+  //     localStorage.getItem('email') &&
+  //     localStorage.getItem('password') &&
+  //     localStorage.getItem('rememberMe')
+  //   ) {
+  //     alert('Login success!');
+  //     nav('/home');
+  //   }
+  // });
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
