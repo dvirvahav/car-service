@@ -1,24 +1,30 @@
 import Axios from 'axios';
 import { MDBInput } from 'mdb-react-ui-kit';
-import { FC, useRef, useState } from 'react';
-import Popup from 'reactjs-popup';
-import { PopupActions } from 'reactjs-popup/dist/types';
+import { FC, useState } from 'react';
+
+import Swal from 'sweetalert2';
 
 export const Forgot: FC = () => {
   const [email, setEmail] = useState<string>('');
-  const popupRef = useRef<PopupActions>(null);
-  const [successfulSignUp, setSuccessfulSignUp] = useState<boolean>(false);
+
   const handleSubmit = (event: { preventDefault: () => void }) => {
-    popupRef.current?.open();
     event?.preventDefault();
     Axios.post('/api/resetPassword', { mail: email })
       .then(() => {
-        console.log('Mail has been sent successfully');
-        setSuccessfulSignUp(true);
+        Swal.fire({
+          title: 'Success!',
+          text: 'Mail has been sent successfully!',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        });
       })
-      .catch((error) => {
-        setSuccessfulSignUp(false);
-        console.log(error);
+      .catch(() => {
+        Swal.fire({
+          title: 'Error!',
+          text: 'Something went wring with your reset, try again later.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
       });
   };
 
@@ -40,23 +46,7 @@ export const Forgot: FC = () => {
                   Forgot your password?
                 </h1>
                 <hr className='hr' />
-                <Popup ref={popupRef} modal>
-                  <div className='alert popup text-center'>
-                    {successfulSignUp ? (
-                      <div role='alert'>
-                        <br />
-                        Password resetted! Details has been sent to your mail.
-                        <br /> <br />
-                      </div>
-                    ) : (
-                      <div role='alert'>
-                        <br />
-                        Error, password hasn't been resetted, try again later
-                        <br /> <br />
-                      </div>
-                    )}
-                  </div>
-                </Popup>
+
                 <div className='form-outline mb-4'>
                   <MDBInput
                     wrapperClass='mb-4'

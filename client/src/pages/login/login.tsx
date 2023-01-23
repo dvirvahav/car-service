@@ -7,12 +7,7 @@ import { FC, useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useUserContext } from '../../context/user';
 import { useNavigate } from 'react-router-dom';
-import Popup from 'reactjs-popup';
-import { PopupActions } from 'reactjs-popup/dist/types';
-// ES6 Modules or TypeScript
 import Swal from 'sweetalert2';
-
-// CommonJS
 
 export const Login: FC = () => {
   const nav = useNavigate();

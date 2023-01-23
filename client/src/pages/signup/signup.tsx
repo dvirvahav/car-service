@@ -2,8 +2,6 @@ import Axios from 'axios';
 import { MDBBtn, MDBInput } from 'mdb-react-ui-kit';
 import PasswordValidator from 'password-validator';
 import { FC, useReducer, useRef, useState } from 'react';
-import Popup from 'reactjs-popup';
-import { PopupActions } from 'reactjs-popup/dist/types';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import md5 from 'md5';
@@ -12,11 +10,10 @@ import Swal from 'sweetalert2';
 
 export const Signup: FC = () => {
   const [errors, setErrors] = useState<string[]>([]);
-  const [successfulSignUp, setSuccessfulSignUp] = useState<boolean>(false);
-  const [state, dispatch] = useReducer(reducer, initialState);
-  var schema = new PasswordValidator();
-  const popupRef = useRef<PopupActions>(null);
   const navigate: NavigateFunction = useNavigate();
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  var schema = new PasswordValidator();
   const reRef = useRef<ReCAPTCHA>(null);
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
@@ -75,7 +72,7 @@ export const Signup: FC = () => {
           // });
           .then((response) => {
             console.log('Successfully sign up!');
-            setSuccessfulSignUp(true);
+
             Swal.fire({
               title: 'Success',
               text: 'Your account has been successfully created! Details has been sent to your mail.',

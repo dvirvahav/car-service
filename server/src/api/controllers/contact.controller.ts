@@ -1,8 +1,7 @@
 import Axios from 'axios';
 import { Request, Response } from 'express';
 import { Knex } from 'knex';
-import { mailService, welcomeMail } from '../email/nodeMailer';
-import { reCaptchaService } from '../services/recaptcha.service';
+import { sendContactEmail } from '../email/nodeMailer';
 
 export const contactController =
   (db: Knex<any, unknown[]>) => (request: Request, response: Response) => {
@@ -10,4 +9,6 @@ export const contactController =
     const firstName: string = request.body.firstName;
     const lastName: string = request.body.lastName;
     const comment: string = request.body.comment;
+
+    sendContactEmail(mail, firstName, lastName, response, comment);
   };

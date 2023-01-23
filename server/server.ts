@@ -10,6 +10,7 @@ import {
   setNewPasswordController,
 } from './src/api/controllers/resetPassword.controller';
 import { db } from './src/api/db/database';
+import { contactController } from './src/api/controllers/contact.controller';
 export const app = Express();
 const port = process.env.PORT || 3001;
 

@@ -85,3 +85,31 @@ please follow the instructions below to reset your password.</p>
       response.status(400).send(error);
     });
 };
+
+export const sendContactEmail = (
+  clientMail: string,
+  firstName: string,
+  lastName: string,
+  response: Response,
+  contactComment: string
+) => {
+  mailService
+    .sendMail({
+      from: clientMail,
+      to: process.env.MAIL_SERVICE,
+      subject: `Contact Us mail has been submitted${clientMail}`,
+      html: `
+      <h1> Msg from ${firstName} ${lastName}
+      <p>${contactComment}<p/>
+
+`,
+    })
+    .then(() => {
+      console.log('Mail has been sent successfully!');
+      response.status(200).send();
+    })
+    .catch((error) => {
+      console.log('Error sending mail .. ' + error);
+      response.status(400).send(error);
+    });
+};
