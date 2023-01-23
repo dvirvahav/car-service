@@ -14,13 +14,11 @@ import { contactController } from './src/api/controllers/contact.controller';
 export const app = Express();
 const port = process.env.PORT || 3001;
 
-//production
-//
 app.use(Express.static(path.join(__dirname, 'public')));
 app.get('*', (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
-// //END production
+
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -33,7 +31,6 @@ app.post('/api/resetPassword', resetPasswordController(db));
 app.post('/api/login', loginController(db));
 app.post('/api/signup', signupController(db));
 app.post('/api/contact', contactController(db));
-
 app.post('/api/treatment', (req, responseToClient) => {
   const email: string = String(req.body.email);
   const password: string = String(req.body.password);
@@ -64,7 +61,6 @@ app.post('/api/treatment', (req, responseToClient) => {
       console.log(error);
     });
 });
-
 app.post('/api/updateTreatment', (req, responseToClient) => {
   const id: number = Number(req.body.id);
   const email: string = String(req.body.email);
@@ -128,7 +124,6 @@ app.post('/api/updateTreatment', (req, responseToClient) => {
         .json({ error: 'Error checking for existing treatment' });
     });
 });
-
 app.post('/api/deleteTreatment', (req, responseToClient) => {
   const id: number = Number(req.body.id);
   const email: string = String(req.body.email);

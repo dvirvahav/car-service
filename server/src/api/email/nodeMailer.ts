@@ -22,9 +22,11 @@ export const sendContactEmail = (
     .sendMail({
       from: process.env.MAIL_SERVICE,
       to: process.env.MAIL_SERVICE,
-      subject: `Contact Us mail has been submitted${clientMail}`,
+      subject: `Contact Us mail has been submitted  ${clientMail}`,
       html: `
       <h1> Msg from ${firstName} ${lastName}
+      <br/>
+      
       <p>${contactComment}<p/>
 
 `,

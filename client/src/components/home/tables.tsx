@@ -5,7 +5,7 @@ import { createApiClient } from '../../api/api';
 import Button from '@mui/material/Button';
 import { useTreatmentsContext } from '../../context/treatments';
 import { DataGrid, GridApi, GridCellValue, GridColDef } from '@mui/x-data-grid';
-
+import Swal from 'sweetalert2';
 const api = createApiClient();
 
 export default function DataGridDemo() {
@@ -94,9 +94,22 @@ export default function DataGridDemo() {
               String(car_id)
             )
             .then(() => {
-              console.log('update: Data loaded successfully ');
-              console.log(treatments);
+              Swal.fire({
+                title: 'Success!',
+                text: 'Updated query successfully',
+                icon: 'success',
+                confirmButtonText: 'OK',
+              });
+
               window.location.reload();
+            })
+            .catch(() => {
+              Swal.fire({
+                title: 'Error!',
+                text: 'Something went wrong!',
+                icon: 'error',
+                confirmButtonText: 'OK',
+              });
             });
         };
         return (

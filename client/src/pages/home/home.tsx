@@ -37,7 +37,7 @@ export const Home: FC = () => {
       .then(() => {
         Swal.fire({
           title: 'Success!',
-          text: 'You will be transferred to Home page.',
+          text: 'Database updated!',
           icon: 'success',
           confirmButtonText: 'OK',
         });
@@ -116,7 +116,7 @@ export const Home: FC = () => {
               Worker Email:
               <input
                 className='form-control'
-                type='text'
+                type='email'
                 value={workerMail}
                 onChange={(e) => setWorkerMail(e.target.value)}
               />
