@@ -8,6 +8,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import md5 from 'md5';
 import { initialState, reducer } from './signup.logic';
+import Swal from 'sweetalert2';
 
 export const Signup: FC = () => {
   const [errors, setErrors] = useState<string[]>([]);
@@ -39,7 +40,7 @@ export const Signup: FC = () => {
       .has()
       .symbols()
       .validate(state.password, { details: true });
-    popupRef.current?.open();
+    // popupRef.current?.open();
     if (Array.isArray(passwordValidator)) {
       setErrors(passwordValidator.map((error) => error.message).slice());
       if (
@@ -54,16 +55,42 @@ export const Signup: FC = () => {
           password: md5(state.password),
           reCaptcha: reRef.current?.getValue(),
         })
+
+          // .then(() => {
+          //   Swal.fire({
+          //     title: 'Success!',
+          //     text: 'You will be transferred to Home page.',
+          //     icon: 'success',
+          //     confirmButtonText: 'OK',
+          //   });
+          //   window.location.reload();
+          // })
+          // .catch(() => {
+          //   Swal.fire({
+          //     title: 'Error!',
+          //     text: 'Something went wring sending your mail, try again later ',
+          //     icon: 'error',
+          //     confirmButtonText: 'OK',
+          //   });
+          // });
           .then((response) => {
             console.log('Successfully sign up!');
             setSuccessfulSignUp(true);
-
-            if (response.data !== 'Error') {
-              navigate('/login');
-            }
+            Swal.fire({
+              title: 'Success',
+              text: 'Your account has been successfully created! Details has been sent to your mail.',
+              icon: 'success',
+              confirmButtonText: 'Login',
+            });
+            navigate('/login');
           })
           .catch(() => {
-            alert("Couldn't get a response from server");
+            Swal.fire({
+              title: 'Error!',
+              text: errors.toString(),
+              icon: 'error',
+              confirmButtonText: 'OK',
+            });
           });
       }
     }
@@ -171,24 +198,6 @@ export const Signup: FC = () => {
                   type='submit'>
                   Submit Form
                 </MDBBtn>
-                <Popup ref={popupRef} modal>
-                  <div className='alert popup text-center'>
-                    {successfulSignUp ? (
-                      <div role='alert'>
-                        Your account has been successfully created! <br />
-                        Details has been sent to your mail.
-                        <br /> <br />
-                        <a href='/' className='btn btn-primary'>
-                          Login
-                        </a>
-                      </div>
-                    ) : state.password !== state.verifyPassword ? (
-                      <div>Passwords do not match</div>
-                    ) : (
-                      errors.map((error) => <p key={error}>{error}</p>)
-                    )}
-                  </div>
-                </Popup>
                 <p
                   className='small fw-bold mt-2 pt-1 mb-0'
                   style={{ verticalAlign: 'middle' }}>

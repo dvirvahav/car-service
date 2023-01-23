@@ -7,25 +7,21 @@ import { FC, useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useUserContext } from '../../context/user';
 import { useNavigate } from 'react-router-dom';
+import Popup from 'reactjs-popup';
+import { PopupActions } from 'reactjs-popup/dist/types';
+// ES6 Modules or TypeScript
+import Swal from 'sweetalert2';
+
+// CommonJS
 
 export const Login: FC = () => {
   const nav = useNavigate();
+
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const { setUser } = useUserContext();
-  const [rememberMe, setRememberMe] = useState<boolean>(false);
+  const [rememberMe, setRememberMe] = useState<boolean>();
   const reRef = useRef<ReCAPTCHA>(null);
-
-  // window.addEventListener('load', function () {
-  //   if (
-  //     localStorage.getItem('email') &&
-  //     localStorage.getItem('password') &&
-  //     localStorage.getItem('rememberMe')
-  //   ) {
-  //     alert('Login success!');
-  //     nav('/home');
-  //   }
-  // });
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
@@ -48,11 +44,21 @@ export const Login: FC = () => {
         rememberMe
           ? localStorage.setItem('rememberMe', 'f')
           : localStorage.removeItem('rememberMe');
-
+        Swal.fire({
+          title: 'Success!',
+          text: 'You will be transferred to Home page.',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        });
         nav('/home');
       })
       .catch((error) => {
-        alert(error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Did you forgot your password/mail? ',
+          icon: 'error',
+          confirmButtonText: 'Try Again',
+        });
       });
   };
   return (

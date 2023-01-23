@@ -31,6 +31,8 @@ app.post('/api/resetPassword/:token', setNewPasswordController(db));
 app.post('/api/resetPassword', resetPasswordController(db));
 app.post('/api/login', loginController(db));
 app.post('/api/signup', signupController(db));
+app.post('/api/contact', contactController(db));
+
 app.post('/api/treatment', (req, responseToClient) => {
   const email: string = String(req.body.email);
   const password: string = String(req.body.password);

@@ -7,6 +7,7 @@ import { PopupActions } from 'reactjs-popup/dist/types';
 import { createApiClient } from '../../api/api';
 import DataGridDemo from '../../components/home/tables';
 import './home.css';
+import Swal from 'sweetalert2';
 const api = createApiClient();
 export const Home: FC = () => {
   const [info, setInfo] = useState('');
@@ -26,7 +27,23 @@ export const Home: FC = () => {
         String(workerMail),
         String(carId)
       )
-      .then(() => window.location.reload());
+      .then(() => {
+        Swal.fire({
+          title: 'Success!',
+          text: 'You will be transferred to Home page.',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        });
+        window.location.reload();
+      })
+      .catch(() => {
+        Swal.fire({
+          title: 'Error!',
+          text: 'Something went wring sending your mail, try again later ',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+      });
   };
 
   return (

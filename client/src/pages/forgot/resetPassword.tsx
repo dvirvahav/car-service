@@ -50,7 +50,7 @@ export const ResetPasswordPage: FC = () => {
           })
           .catch(() => {
             setSuccessfulSignUp(false);
-            setErrors(['Something wen wrong..']);
+            setErrors(['Something went wrong..']);
           });
     }
   };
