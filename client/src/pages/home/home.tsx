@@ -19,8 +19,7 @@ export const Home: FC = () => {
 
   useEffect(() => {
     if (
-      !localStorage.getItem('rememberMe') ||
-      (localStorage.getItem('username') && localStorage.getItem('password'))
+      !(localStorage.getItem('username') && localStorage.getItem('password'))
     ) {
       navigate('/');
     }
@@ -75,7 +74,8 @@ export const Home: FC = () => {
           type='submit'
           onClick={() => {
             localStorage.removeItem('rememberMe');
-
+            localStorage.removeItem('email');
+            localStorage.removeItem('password');
             navigate('/');
           }}></button>
       </header>
