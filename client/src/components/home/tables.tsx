@@ -88,11 +88,11 @@ export default function DataGridDemo() {
           api
             .updateTreatment(
               String(thisRow['id']),
-              String(localStorage.getItem('email')),
-              md5(String(localStorage.getItem('password'))),
               String(thisRow['info']),
+              String(thisRow['car_id']),
               String(thisRow['worker_email']),
-              String(thisRow['car_id'])
+              String(localStorage.getItem('email')),
+              md5(String(localStorage.getItem('password')))
             )
             .then(() => {
               Swal.fire({
