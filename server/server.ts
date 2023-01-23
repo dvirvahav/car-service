@@ -64,8 +64,6 @@ app.post('/api/treatment', (req, responseToClient) => {
 app.post('/api/updateTreatment', (req, responseToClient) => {
   const id: number = Number(req.body.id);
   const email: string = String(req.body.email);
-  const password: string = String(req.body.password);
-
   const info: string = String(req.body.info);
   const car_id: string = String(req.body.car_id);
   const worker_email: string = String(req.body.worker_email);
@@ -99,9 +97,9 @@ app.post('/api/updateTreatment', (req, responseToClient) => {
         // case its insert
         db('treatments')
           .insert({
-            info,
-            worker_email,
-            car_id,
+            info: info,
+            worker_email: worker_email,
+            car_id: car_id,
             user_email: email,
           })
           .then(() => {
