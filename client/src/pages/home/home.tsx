@@ -1,5 +1,5 @@
 import md5 from 'md5';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Popup from 'reactjs-popup';
@@ -8,13 +8,23 @@ import { createApiClient } from '../../api/api';
 import DataGridDemo from '../../components/home/tables';
 import './home.css';
 import Swal from 'sweetalert2';
+
 const api = createApiClient();
 export const Home: FC = () => {
   const [info, setInfo] = useState('');
   const [workerMail, setWorkerMail] = useState('');
   const [carId, setCarId] = useState('');
-  const nav = useNavigate();
   const popupRef = useRef<PopupActions>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (
+      !localStorage.getItem('rememberMe') &&
+      (!localStorage.getItem('username') || !localStorage.getItem('password'))
+    ) {
+      navigate('/');
+    }
+  }, [navigate]);
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -47,7 +57,7 @@ export const Home: FC = () => {
   };
 
   return (
-    <body>
+    <div>
       <header
         style={{ backgroundColor: '#3b71ca' }}
         className='navbar navbar-dark sticky-top  flex-md-nowrap  shadow'>
@@ -56,12 +66,19 @@ export const Home: FC = () => {
         </a>
         <i aria-hidden='true'></i>
         <button
-          style={{ backgroundColor: '#3b71ca', color: 'white', border: 'none' }}
+          style={{
+            backgroundColor: '#3b71ca',
+            color: 'white',
+            border: 'none',
+          }}
           className='fa fa-sign-out'
           type='submit'
           onClick={() => {
             localStorage.removeItem('rememberMe');
-            nav('/');
+            localStorage.removeItem('username');
+            localStorage.removeItem('password');
+
+            navigate('/');
           }}></button>
       </header>
 
@@ -128,6 +145,6 @@ export const Home: FC = () => {
           </div>
         </main>
       </div>
-    </body>
+    </div>
   );
 };

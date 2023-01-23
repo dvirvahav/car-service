@@ -10,14 +10,12 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 export const Login: FC = () => {
-  const nav = useNavigate();
-
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const { setUser } = useUserContext();
-  const [rememberMe, setRememberMe] = useState<boolean>();
+  const [rememberMe, setRememberMe] = useState<boolean>(false);
   const reRef = useRef<ReCAPTCHA>(null);
-
+  const navigate = useNavigate();
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
@@ -34,18 +32,19 @@ export const Login: FC = () => {
           firstName: 'Check2',
         });
         // setTreatments(response.data);
-        localStorage.setItem('email', email);
-        localStorage.setItem('password', password);
-        rememberMe
-          ? localStorage.setItem('rememberMe', 'f')
-          : localStorage.removeItem('rememberMe');
+        if (rememberMe) {
+          localStorage.setItem('email', email);
+          localStorage.setItem('password', password);
+          localStorage.setItem('rememberMe', 'true');
+        }
+
         Swal.fire({
           title: 'Success!',
           text: 'You will be transferred to Home page.',
           icon: 'success',
           confirmButtonText: 'OK',
         });
-        nav('/home');
+        navigate('/home');
       })
       .catch((error) => {
         Swal.fire({
