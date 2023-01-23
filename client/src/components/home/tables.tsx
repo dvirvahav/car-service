@@ -17,7 +17,7 @@ export default function DataGridDemo() {
     {
       field: 'info',
       headerName: 'Information',
-      width: 150,
+      width: 200,
       editable: true,
     },
     {
@@ -29,13 +29,13 @@ export default function DataGridDemo() {
     {
       field: 'worker_email',
       headerName: 'Worker Email',
-      width: 150,
+      width: 200,
       editable: true,
     },
     {
       field: 'car_id',
       headerName: 'Car ID',
-      width: 150,
+      width: 200,
       editable: true,
     },
     {
