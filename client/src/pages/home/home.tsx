@@ -27,7 +27,7 @@ export const Home: FC = () => {
     e.preventDefault();
     api
       .updateTreatment(
-        '',
+        'non',
         String(info),
         String(carId),
         String(workerMail),

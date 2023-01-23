@@ -33,20 +33,20 @@ export const createApiClient = (): ApiClient => {
     },
     updateTreatment: (
       id: string,
-      email: string,
-      password: string,
-      worker_email: string,
       info: string,
-      car_id: string
+      car_id: string,
+      worker_email: string,
+      email: string,
+      password: string
     ) => {
       return axios
         .post('/api/updateTreatment', {
           id: id,
-          email: email,
-          password: password,
-          worker_email: worker_email,
           info: info,
           car_id: car_id,
+          worker_email: worker_email,
+          email: email,
+          password: password,
         })
         .then((res) => {
           return res.data;
