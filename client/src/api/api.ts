@@ -52,7 +52,7 @@ export const createApiClient = (): ApiClient => {
           return res.data;
         })
         .catch((error) => {
-          return error;
+          console.log(error);
         });
     },
     contactUs: (
@@ -73,7 +73,7 @@ export const createApiClient = (): ApiClient => {
           return res.data;
         })
         .catch((error) => {
-          return error;
+          console.log(error);
         });
     },
   };

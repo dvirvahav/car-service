@@ -84,13 +84,13 @@ export default function DataGridDemo() {
               (c: any) =>
                 (thisRow[c.field] = params.getValue(params.id, c.field))
             );
-
+          const { id, info, worker_email, car_id } = thisRow;
           api
             .updateTreatment(
-              String(thisRow['id']),
-              String(thisRow['info']),
-              String(thisRow['car_id']),
-              String(thisRow['worker_email']),
+              String(id),
+              String(info),
+              String(car_id),
+              String(worker_email),
               String(localStorage.getItem('email')),
               md5(String(localStorage.getItem('password')))
             )
