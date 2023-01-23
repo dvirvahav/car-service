@@ -4,9 +4,11 @@ import { MDBBtn, MDBInput } from 'mdb-react-ui-kit';
 import { contactReducer, initialStateContact } from './contact.logic';
 import Axios from 'axios';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 export const Contact: FC = () => {
   const [state, dispatch] = useReducer(contactReducer, initialStateContact);
+  const navigate = useNavigate();
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event?.preventDefault();
     Axios.post('/api/contact', {
@@ -26,21 +28,52 @@ export const Contact: FC = () => {
       .catch(() => {
         Swal.fire({
           title: 'Error!',
-          text: 'Something went wring sending your mail, try again later ',
+          text: 'Something went wrong sending your mail, try again later ',
           icon: 'error',
           confirmButtonText: 'OK',
         });
       });
   };
   return (
-    <div className='container logo loading-medium '>
-      <div className='row'>
+    <div className='container logo '>
+      <nav
+        style={{ backgroundColor: '#3b71ca' }}
+        className='navbar navbar-dark sticky-top  flex-md-nowrap  shadow'>
+        <a className='navbar-brand col-md-3 col-lg-2 me-0 px-3' href='/home'>
+          Dashboard
+        </a>
+
+        <a
+          className='navbar-brand '
+          style={{ listStyle: 'false' }}
+          href='/contact'>
+          Contact Us
+        </a>
+        <i aria-hidden='true'></i>
+        <button
+          style={{
+            backgroundColor: '#3b71ca',
+            color: 'white',
+            border: 'none',
+          }}
+          className='fa fa-sign-out'
+          type='submit'
+          onClick={() => {
+            localStorage.removeItem('rememberMe');
+            localStorage.removeItem('email');
+            localStorage.removeItem('password');
+            navigate('/');
+          }}>
+          Log Out
+        </button>
+      </nav>
+      <div className='row loading-medium '>
         <div className='col-md-12 text-center logo'>
           <img src='https://i.ibb.co/YN483kn/logo.png' alt='Logo' />
         </div>
       </div>
       <div className='row'>
-        <div className='col-md-3 shadow-like3'>
+        <div className='col-md-3 shadow-like3 loading-slow '>
           <img
             src='https://i.ibb.co/9ZPs3ZL/fast.png'
             alt='Fast'
@@ -52,7 +85,7 @@ export const Contact: FC = () => {
             by the state inspector of car fixing places.
           </p>
         </div>
-        <div className='col-md-3 shadow-like1'>
+        <div className='col-md-3 shadow-like1 loading-slow '>
           <img
             src='https://i.ibb.co/RgJ2jKD/POP.jpg'
             alt='People of people'
@@ -64,7 +97,7 @@ export const Contact: FC = () => {
             back a customer service team that works around the clock.
           </p>
         </div>
-        <div className='col-md-3 shadow-like3'>
+        <div className='col-md-3 shadow-like3 loading-slow'>
           <img
             src='https://i.ibb.co/ZXMK7pV/certified.png'
             alt='Certified'
@@ -77,7 +110,7 @@ export const Contact: FC = () => {
             provide a professional response to all types of your vehicle.
           </p>
         </div>
-        <div className='col-md-3 shadow-like1'>
+        <div className='col-md-3 shadow-like1 loading-slow'>
           <img
             src='https://i.ibb.co/GFQqDJF/strong-brand.png'
             alt='Strong Brand'

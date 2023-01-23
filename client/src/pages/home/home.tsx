@@ -56,12 +56,19 @@ export const Home: FC = () => {
   };
 
   return (
-    <div>
-      <header
+    <div className='container logo '>
+      <nav
         style={{ backgroundColor: '#3b71ca' }}
         className='navbar navbar-dark sticky-top  flex-md-nowrap  shadow'>
-        <a className='navbar-brand col-md-3 col-lg-2 me-0 px-3' href='/'>
-          Car Service
+        <a className='navbar-brand col-md-3 col-lg-2 me-0 px-3' href='/home'>
+          Dashboard
+        </a>
+
+        <a
+          className='navbar-brand '
+          style={{ listStyle: 'false' }}
+          href='/contact'>
+          Contact Us
         </a>
         <i aria-hidden='true'></i>
         <button
@@ -77,11 +84,13 @@ export const Home: FC = () => {
             localStorage.removeItem('email');
             localStorage.removeItem('password');
             navigate('/');
-          }}></button>
-      </header>
+          }}>
+          Log Out
+        </button>
+      </nav>
 
       <Popup ref={popupRef} modal>
-        <div className='alert popup text-center'>
+        <div className='alert popup text-center loading-medium '>
           {' '}
           <form onSubmit={handleSubmit} className='form-group'>
             <label>
@@ -121,27 +130,29 @@ export const Home: FC = () => {
           </form>
         </div>
       </Popup>
-
-      <div className='container-fluid'>
-        <main className=' px-md-4'>
-          <h2>Car service</h2>
-
-          <div className='table-responsive dataTable'>
-            <DataGridDemo />
-            <button
-              style={{
-                backgroundColor: '#3b71ca',
-                color: 'white',
-                border: 'none',
-              }}
-              type='submit'
-              onClick={() => {
-                popupRef.current?.open();
-              }}>
-              +
-            </button>
-          </div>
-        </main>
+      <br />
+      <h1>Car service</h1>
+      <div
+        className='container-fluid'
+        style={{
+          marginTop: '100px',
+          padding: '0',
+          height: '400px',
+        }}>
+        <br />
+        <DataGridDemo />
+        <button
+          style={{
+            backgroundColor: '#3b71ca',
+            color: 'white',
+            border: 'none',
+          }}
+          type='submit'
+          onClick={() => {
+            popupRef.current?.open();
+          }}>
+          +
+        </button>
       </div>
     </div>
   );
