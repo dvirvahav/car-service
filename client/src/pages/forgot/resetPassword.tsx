@@ -1,18 +1,17 @@
 import md5 from 'md5';
 import Axios from 'axios';
-import { FC, useRef, useState } from 'react';
+import { FC, useState } from 'react';
 import { NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
-import { PopupActions } from 'reactjs-popup/dist/types';
 import PasswordValidator from 'password-validator';
-import Popup from 'reactjs-popup';
+import Swal from 'sweetalert2';
 
 export const ResetPasswordPage: FC = () => {
   const location = useLocation();
   const token = location.pathname.split('/').pop();
-  const [successfulSignUp, setSuccessfulSignUp] = useState<boolean>(false);
+
   const [newPassword, setNewPassword] = useState<string>('');
   var schema = new PasswordValidator();
-  const popupRef = useRef<PopupActions>(null);
+
   const [errors, setErrors] = useState<string[]>([]);
   const navigate: NavigateFunction = useNavigate();
 
@@ -36,21 +35,29 @@ export const ResetPasswordPage: FC = () => {
       .has()
       .symbols()
       .validate(newPassword, { details: true });
-    popupRef.current?.open();
+
     if (Array.isArray(passwordValidator)) {
       setErrors(passwordValidator.map((error) => error.message).slice());
       if (passwordValidator.length === 0)
         Axios.post(`/api/resetPassword/${token}`, {
           password: md5(newPassword),
         })
-          .then((response) => {
-            console.log(response);
-            setSuccessfulSignUp(true);
+          .then(() => {
+            Swal.fire({
+              title: 'Success',
+              text: 'Your password has been resetted successfully,,redirect to login.',
+              icon: 'success',
+              confirmButtonText: 'OK',
+            });
             navigate('/');
           })
           .catch(() => {
-            setSuccessfulSignUp(false);
-            setErrors(['Something went wrong..']);
+            Swal.fire({
+              title: 'Error!',
+              text: errors.toString(),
+              icon: 'error',
+              confirmButtonText: 'OK',
+            });
           });
     }
   };
@@ -95,22 +102,6 @@ export const ResetPasswordPage: FC = () => {
                   Reset Password
                 </button>
               </form>
-              <Popup ref={popupRef} modal>
-                <div className='alert popup text-center'>
-                  {successfulSignUp ? (
-                    <div role='alert'>
-                      <br />
-                      Password successfully resetted, redirect to login...
-                      <br /> <br />
-                      <a href='/' className='btn btn-primary'>
-                        Login
-                      </a>
-                    </div>
-                  ) : (
-                    errors.map((error) => <p key={error}>{error}</p>)
-                  )}
-                </div>
-              </Popup>
             </div>
           </div>
         </div>
