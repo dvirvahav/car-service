@@ -14,10 +14,10 @@ import { contactController } from './src/api/controllers/contact.controller';
 export const app = Express();
 const port = process.env.PORT || 3001;
 
-app.use(Express.static(path.join(__dirname, 'public')));
-app.get('*', (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+// app.use(Express.static(path.join(__dirname, 'public')));
+// app.get('*', (req: Request, res: Response) => {
+//   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// });
 
 app.use(bodyParser.json());
 app.use(cors());
