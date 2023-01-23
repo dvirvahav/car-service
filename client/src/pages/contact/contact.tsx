@@ -17,7 +17,7 @@ export const Contact: FC = () => {
       .then(() => {
         Swal.fire({
           title: 'Success!',
-          text: 'You will be transferred to Home page.',
+          text: 'Thanks for your comment :)',
           icon: 'success',
           confirmButtonText: 'OK',
         });

@@ -20,7 +20,7 @@ export const sendContactEmail = (
 ) => {
   mailService
     .sendMail({
-      from: clientMail,
+      from: process.env.MAIL_SERVICE,
       to: process.env.MAIL_SERVICE,
       subject: `Contact Us mail has been submitted${clientMail}`,
       html: `
