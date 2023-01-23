@@ -28,11 +28,11 @@ export const Home: FC = () => {
     api
       .updateTreatment(
         '',
-        String(localStorage.getItem('email')),
-        md5(String(localStorage.getItem('password'))),
         String(info),
+        String(carId),
         String(workerMail),
-        String(carId)
+        String(localStorage.getItem('email')),
+        md5(String(localStorage.getItem('password')))
       )
       .then(() => {
         Swal.fire({
