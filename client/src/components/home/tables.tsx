@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import { useTreatmentsContext } from '../../context/treatments';
 import { DataGrid, GridApi, GridCellValue, GridColDef } from '@mui/x-data-grid';
 import Swal from 'sweetalert2';
+
 const api = createApiClient();
 
 export default function DataGridDemo() {
@@ -83,15 +84,15 @@ export default function DataGridDemo() {
               (c: any) =>
                 (thisRow[c.field] = params.getValue(params.id, c.field))
             );
-          const { id, info, worker_email, car_id } = thisRow;
+
           api
             .updateTreatment(
-              String(id),
+              String(thisRow['id']),
               String(localStorage.getItem('email')),
               md5(String(localStorage.getItem('password'))),
-              String(info),
-              String(worker_email),
-              String(car_id)
+              String(thisRow['info']),
+              String(thisRow['worker_email']),
+              String(thisRow['car_id'])
             )
             .then(() => {
               Swal.fire({

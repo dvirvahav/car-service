@@ -25,7 +25,6 @@ export const createApiClient = (): ApiClient => {
           password: password,
         })
         .then((res) => {
-          console.log(res.data);
           return res.data;
         })
         .catch((error) => {
@@ -50,7 +49,6 @@ export const createApiClient = (): ApiClient => {
           password: password,
         })
         .then((res) => {
-          console.log(res.data);
           return res.data;
         })
         .catch((error) => {
