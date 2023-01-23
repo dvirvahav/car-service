@@ -2,21 +2,18 @@ import { FC, useReducer } from 'react';
 import './contact.css';
 import { MDBBtn, MDBInput } from 'mdb-react-ui-kit';
 import { contactReducer, initialStateContact } from './contact.logic';
-import Axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { createApiClient } from '../../api/api';
+const api = createApiClient();
 
 export const Contact: FC = () => {
   const [state, dispatch] = useReducer(contactReducer, initialStateContact);
   const navigate = useNavigate();
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event?.preventDefault();
-    Axios.post('/api/contact', {
-      mail: state.mail,
-      firstName: state.firstName,
-      lastName: state.lastName,
-      comment: state.comment,
-    })
+    api
+      .contactUs(state.mail, state.firstName, state.lastName, state.comment)
       .then(() => {
         Swal.fire({
           title: 'Success!',

@@ -50,4 +50,10 @@ export type ApiClient = {
     email: string,
     password: string
   ) => Promise<getTreatmentsState>;
+  contactUs: (
+    mail: string,
+    firstName: string,
+    lastName: string,
+    comment: string
+  ) => Promise<string>;
 };

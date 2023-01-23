@@ -1,7 +1,7 @@
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import { MDBBtn, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
 import md5 from 'md5';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Axios from 'axios';
 import { FC, useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -16,6 +16,17 @@ export const Login: FC = () => {
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const reRef = useRef<ReCAPTCHA>(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (
+      localStorage.getItem('rememberMe') &&
+      localStorage.getItem('email') &&
+      localStorage.getItem('password')
+    ) {
+      navigate('/home');
+    }
+  }, [navigate]);
+
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
 

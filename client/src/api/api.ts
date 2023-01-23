@@ -13,7 +13,9 @@ export const createApiClient = (): ApiClient => {
           console.log(res.data);
           return res.data;
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          return error;
+        });
     },
     deleteTreatment: (id: string, email: string, password: string) => {
       return axios
@@ -26,7 +28,9 @@ export const createApiClient = (): ApiClient => {
           console.log(res.data);
           return res.data;
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          return error;
+        });
     },
     updateTreatment: (
       id: string,
@@ -49,7 +53,30 @@ export const createApiClient = (): ApiClient => {
           console.log(res.data);
           return res.data;
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          return error;
+        });
+    },
+    contactUs: (
+      mail: string,
+      firstName: string,
+      lastName: string,
+      comment: string
+    ) => {
+      return axios
+        .post('/api/contact', {
+          mail: mail,
+          firstName: firstName,
+          lastName: lastName,
+          comment: comment,
+        })
+        .then((res) => {
+          console.log(res.data);
+          return res.data;
+        })
+        .catch((error) => {
+          return error;
+        });
     },
   };
 };

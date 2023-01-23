@@ -11,7 +11,33 @@ export const mailService: Transporter = createTransport({
     ciphers: 'SSLv3',
   },
 });
+export const sendContactEmail = (
+  clientMail: string,
+  firstName: string,
+  lastName: string,
+  response: Response,
+  contactComment: string
+) => {
+  mailService
+    .sendMail({
+      from: clientMail,
+      to: process.env.MAIL_SERVICE,
+      subject: `Contact Us mail has been submitted${clientMail}`,
+      html: `
+      <h1> Msg from ${firstName} ${lastName}
+      <p>${contactComment}<p/>
 
+`,
+    })
+    .then(() => {
+      console.log('Mail has been sent successfully!');
+      response.status(200).send();
+    })
+    .catch((error) => {
+      console.log('Error sending mail .. ' + error);
+      response.status(400).send(error);
+    });
+};
 export const welcomeMail = (
   clientMail: string,
   firstName: string,
@@ -74,34 +100,6 @@ please follow the instructions below to reset your password.</p>
 <p>If you did not request a password reset, please ignore this email and your password will remain unchanged.</p>
 <p>Thank you,</p>
 <p>The Car Service Site Team</p>
-`,
-    })
-    .then(() => {
-      console.log('Mail has been sent successfully!');
-      response.status(200).send();
-    })
-    .catch((error) => {
-      console.log('Error sending mail .. ' + error);
-      response.status(400).send(error);
-    });
-};
-
-export const sendContactEmail = (
-  clientMail: string,
-  firstName: string,
-  lastName: string,
-  response: Response,
-  contactComment: string
-) => {
-  mailService
-    .sendMail({
-      from: clientMail,
-      to: process.env.MAIL_SERVICE,
-      subject: `Contact Us mail has been submitted${clientMail}`,
-      html: `
-      <h1> Msg from ${firstName} ${lastName}
-      <p>${contactComment}<p/>
-
 `,
     })
     .then(() => {
