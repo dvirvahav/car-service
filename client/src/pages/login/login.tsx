@@ -46,7 +46,7 @@ export const Login: FC = () => {
         });
         navigate('/home');
       })
-      .catch((error) => {
+      .catch(() => {
         Swal.fire({
           title: 'Error!',
           text: 'Did you forgot your password/mail? ',

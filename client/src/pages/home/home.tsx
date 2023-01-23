@@ -18,9 +18,7 @@ export const Home: FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (
-      !(localStorage.getItem('username') && localStorage.getItem('password'))
-    ) {
+    if (!(localStorage.getItem('email') && localStorage.getItem('password'))) {
       navigate('/');
     }
   }, [navigate]);

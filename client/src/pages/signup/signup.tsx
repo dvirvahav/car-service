@@ -52,25 +52,7 @@ export const Signup: FC = () => {
           password: md5(state.password),
           reCaptcha: reRef.current?.getValue(),
         })
-
-          // .then(() => {
-          //   Swal.fire({
-          //     title: 'Success!',
-          //     text: 'You will be transferred to Home page.',
-          //     icon: 'success',
-          //     confirmButtonText: 'OK',
-          //   });
-          //   window.location.reload();
-          // })
-          // .catch(() => {
-          //   Swal.fire({
-          //     title: 'Error!',
-          //     text: 'Something went wring sending your mail, try again later ',
-          //     icon: 'error',
-          //     confirmButtonText: 'OK',
-          //   });
-          // });
-          .then((response) => {
+          .then(() => {
             console.log('Successfully sign up!');
 
             Swal.fire({
@@ -84,11 +66,25 @@ export const Signup: FC = () => {
           .catch(() => {
             Swal.fire({
               title: 'Error!',
-              text: errors.toString(),
+              text: 'Please select your captcha, otherwise its a server error, sorry :(',
               icon: 'error',
               confirmButtonText: 'OK',
             });
           });
+      } else if (passwordValidator.length === 0) {
+        Swal.fire({
+          title: 'Error!',
+          text: 'Passwords do not match!',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+      } else {
+        Swal.fire({
+          title: 'Error!',
+          text: errors.toString(),
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
       }
     }
   };
