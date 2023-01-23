@@ -33,14 +33,14 @@ export const Login: FC = () => {
         });
         // setTreatments(response.data);
         if (rememberMe) {
-          localStorage.setItem('email', email);
-          localStorage.setItem('password', password);
           localStorage.setItem('rememberMe', 'true');
         }
+        localStorage.setItem('email', email);
+        localStorage.setItem('password', password);
 
         Swal.fire({
           title: 'Success!',
-          text: 'You will be transferred to Home page.',
+          text: 'Welcome!',
           icon: 'success',
           confirmButtonText: 'OK',
         });
